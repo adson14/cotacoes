@@ -1,0 +1,21 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit or integration tests.
+
+actor: UnitTester
+modules:
+    enabled:
+        - Asserts
+        - Laravel5:
+              part: ORM
+        - Db
+        - \Helper\Unit
+    config:
+        Db:
+            populate: true
+            #cleanup: true
+            dsn: 'mysql:host=mysql;dbname=test'
+            user: 'root'
+            password: 'root_root'
+            dump: tests/_support/Data/limpa_banco.sql
+    step_decorators: ~
