@@ -1,36 +1,41 @@
-### PROJETO DE TESTE PARA COVERSÃO DE MOEDAS FEITO EM PHP/Laravel:
-Conversão da nossa moeda nacional para uma moeda estrangeira, aplicando algumas taxas e regras, no final da conversão o resultado deverá ficar em tela de forma detalhada.
+### PROJETO DE TESTE PARA COTAÇÃO DE AÇÕES FEITO EM PHP/Laravel:
+A Cotação utiliza informações da IEX Cloud, o resultado deverá ficar em tela de forma detalhada.
 
 ### Regras:
-- Moeda de origem BRL;
-- Informar uma moeda de compra que não seja BRL (exibir no mínimo 2 opções);
-- Valor da Compra em BRL (deve ser maior que R$ 1.000,00 e menor que R$ 100.000,00);
-- Formas de pagamento (taxas aplicadas no valor da compra e aceitar apenas as opções abaixo):
-- - Para pagamentos em boleto, taxa de 1,45%
-- -  Para pagamentos em cartão de crédito, taxa de 7,63%
-- Aplicar taxa de 2% pela conversão para valores abaixo de R$ 3.000,00 e 1% para valores maiores que R$ 3.000,00, essa taxa deve ser aplicada apenas no valor da compra e não sobre o valor já com a taxa de forma de pagamento.
+- Utilizar a API IEX Cloud;
+- Exibir o Último preço da ação e informações sobre a empresa;
+- Gravar as consultas no banco de dados;
+- Evitar requisições repetidas
 
 #### PASSOS PARA CONFIGURAÇÃO: 🚀
-* Versão do php utilizada: 7.3
-* Necessário ter o node e o composer instalados
-- Rodar o comando: php artisan key:generate;
-- Rodar o npm install && npm run dev para rodar algumas dependencias de auteticação;
-- Rodar o composer update;
-- Criar um banco de dados vazio e inserir os dados de acesso no .env;
-- Rodas as migrations e seeds : php artisan migrate:fresh --seed (são importantes);
-- Incluir no .env a seguintes variáveis: (URL_API_SERVICE = "https://economia.awesomeapi.com.br")
+* Versão do php utilizada: 7.4
+* Necessário ter o docker e o docker-compose instalados
+- Criar o arquivo .env para as variáveis de ambiente. Para fins didáticos foi adicionado o .env_temp (Ciente que essas são informações críticas que não devem ser versionadas)
+- Rodar o comando **[docker-compose up -d]**
+- Dentro da pasta raiz executar o comando **[docker-compose ps]** para listar os containers em execução
+- Após obter o nome do container [app] executar o seguinte comando: **[docker exec -it <nome_do_container> bash]**
+- Logo em seguida já dentro do container executar os seguintes comandos para instalar as dependências, gerar a estrutura do banco e criar a key: 
+- - **composer install** 
+- - **php artisan key:generate**
+- - **php artisan migrate**
+- - **php artisan migrate —env=testing**
 
-#### MAIS INFORMAÇÕES: 🚀
-* Para acessar a área administrativa o login padrão é: admin@conversor.com e senha: admin123456
-* Os usuários podem fazer um cadastro normalmente e realizar o login
+#### PASSOS PARA EXECUÇÃO DOS TESTES: 🚀
+* Ainda dentro do container na raiz do projeto executar o seguinte comando para executar os testes:
+- **php vendor/bin/codecept run unit**
 
-#### Principais implementações: 🚀
-- Cotação das moedas
-- Autenticação de usuários
-- Histórico de cotações feita pelo usuário
-- Painel administrativo para configuração de parâmetros;
-- Atualização em tempo real da cotação;
-- Controle ACL
+## Testar a aplicação no endereço: http://localhost:8000/;
+
+### OBS -
+*Aqui Utilizei o pattern repository e um pouco de Service layer
+
+#### Principais Técnologias: 🚀
+- LARAVEL
+- CODECEPTION
+- MYSQL
+- DOCKER
+- NGINX
+- REDIS
 
 ## Meu Contato 🚀🚀🚀
 https://www.linkedin.com/in/adson-souza-21b1493a/
