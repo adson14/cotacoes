@@ -87,11 +87,17 @@ class CotacaoController extends Controller
          * expirada então uma nova consulta será feita à API.
          * Necessário para evitar requisição desnecessárias e esgotar a cota de requisições
          */
-        if($date > $agora){
+        if(!$date > $agora){
             $dados = $dadosBanco[0];
             $tipo_request = 'banco';
         }else{
             $response = $this->consultaAPI('/stock/'.$request->simbolo.'/quote');
+            //$ultima_atualizacao = date('Y-m-d', $response->latestUpdate);
+
+            $date = new \DateTime();
+            $date->setTimestamp(($response->latestUpdate / 1000));
+            $ultima_atualizacao =  $date->format('Y-m-d H:i:s');
+
             $dados_a_gravar = [
                 'simbolo'=>$response->symbol,
                 'organizacao'=>$response->companyName,
@@ -100,7 +106,9 @@ class CotacaoController extends Controller
                 'moeda'=>$response->currency,
                 'abertura'=>$response->open,
                 'fechamento'=>$response->close,
+                'ultima_atualizacao' => $ultima_atualizacao
             ];
+
             $dados = $this->gravaHistorico($dados_a_gravar);
         }
         $dados = $this->formataRequest($tipo_request,$request,$dados);
@@ -137,10 +145,13 @@ class CotacaoController extends Controller
             $request->request->add(['fechamento' => $response->fechamento ?? '-']);
         }
 
+        $ultima_atualizacao = Carbon::parse($response->ultima_atualizacao)->format('d/m/Y');
+
         $request->request->add(['simbolo_moeda' => Acao::getCurrencySimbol($response->currency ?? $response->moeda)]);
         $request->request->add(['moeda' => $response->currency ?? $response->moeda]);
         $request->request->add(['organizacao' => $response->companyName ?? $response->organizacao]);
         $request->request->add(['ultimo_preco' => $response->latestPrice ?? $response->ultimo_preco]);
+        $request->request->add(['ultima_atualizacao' => $ultima_atualizacao]);
 
         return $request;
     }

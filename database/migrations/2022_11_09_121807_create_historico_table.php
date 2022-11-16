@@ -25,6 +25,7 @@ class CreateHistoricoTable extends Migration
             $table->decimal('ultimo_preco',6,2);
             $table->integer('volume')->nullable();
             $table->string('moeda');
+            $table->dateTime('ultima_atualizacao');
             $table->decimal('abertura',6,2)->nullable();
             $table->decimal('fechamento',6,2)->nullable();
             $table->timestamps();

@@ -16,6 +16,8 @@
                             <li class="list-group-item">Símbolo:&ensp; <b>{{$dados->simbolo}}</b> </li>
                             <li class="list-group-item">Moeda:&ensp; <b>{{$dados->moeda}}</b> </li>
                             <li class="list-group-item">Último preço:&ensp; <b id="ultimo_preco">{{$dados->simbolo_moeda}}{{$dados->ultimo_preco}} </b></li>
+                            <li class="list-group-item">Última atualização:&ensp; <b id="ultima_atualizacao">{{$dados->ultima_atualizacao}}</b></li>
+
                             <li class="list-group-item">Volume:&ensp;<b id="volume">{{$dados->volume}}</b> </li>
                             <li class="list-group-item">Abertura: <b id="abertura">{{$dados->simbolo_moeda}}{{$dados->abertura}}</b></li>
                             <li class="list-group-item">Fechamento: <b id="fechamento">{{$dados->simbolo_moeda}}{{$dados->fechamento}}</b></li>

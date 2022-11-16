@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Historico extends Model
 {
-    protected $fillable = ['id','simbolo','organizacao','ultimo_preco','volume','moeda','abertura','fechamento'];
+    protected $fillable = ['id','simbolo','organizacao','ultimo_preco','volume','moeda','ultima_atualizacao','abertura','fechamento'];
     protected $table = 'historico_cotacoes';
 
     protected $primaryKey = 'id';

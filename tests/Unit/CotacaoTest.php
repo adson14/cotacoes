@@ -4,6 +4,17 @@ use Illuminate\Support\Carbon;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 
 
+/**
+ * Princípios de um bom teste
+ *
+ * Fast: O teste deve ser rápido, permitindo que seja realizado várias vezes e a todo momento;
+ * Independent: Ele deve ser independente, a fim de evitar que cause efeito cascata quando da ocorrência de uma falha – o que dificulta a análise dos problemas;
+ * Repeatable: Deve permitir a repetição do teste diversas vezes e em ambientes diferentes;
+ * Self-Validation: Os testes bem escritos retornam com as respostas true ou false, justamente para que a falha não seja subjetiva;
+ * Timely: Os testes devem seguir à risca o critério de pontualidade. Além disso, o ideal é que sejam escritos antes do próprio código, pois evita que ele fique complexo demais para ser testado.
+
+ */
+
 class CotacaoTest extends \Tests\TestCase
 {
     /**
